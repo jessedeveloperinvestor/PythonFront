@@ -1,14 +1,27 @@
-from http.server import SimpleHTTPRequestHandler, HTTPServer
+from flask import Flask, render_template_string
 
-# Set the port number for the server
-port = 8000
+app = Flask(__name__)
 
-# Define the directory containing your frontend files
-directory = '.'  # Replace '.' with the directory path containing your frontend files
+@app.route('/')
+def display_variable():
+    my_variable = "Hello, World!"
+    template = "<h1>{{ variable }}</h1>"
+    return render_template_string(template, variable=my_variable)
 
-# Create an HTTP server with the SimpleHTTPRequestHandler
-httpd = HTTPServer(('', port), SimpleHTTPRequestHandler)
+if __name__ == '__main__':
+    app.run()
 
-# Start the server
-print(f'Starting server on port {port}...')
-httpd.serve_forever()
+# from http.server import SimpleHTTPRequestHandler, HTTPServer
+
+# # Set the port number for the server
+# port = 8000
+
+# # Define the directory containing your frontend files
+# directory = '.'  # Replace '.' with the directory path containing your frontend files
+
+# # Create an HTTP server with the SimpleHTTPRequestHandler
+# httpd = HTTPServer(('', port), SimpleHTTPRequestHandler)
+
+# # Start the server
+# print(f'Starting server on port {port}...')
+# httpd.serve_forever()
